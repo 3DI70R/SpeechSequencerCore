@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1A1BA2CB-18C5-4F82-A8B9-80462B78EE6B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThreeDISevenZeroR.SpeechSequencer.Core</RootNamespace>
+    <AssemblyName>SpeechSequencerCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AudioManager.cs" />
+    <Compile Include="Model\Components\Context\IPlaybackContext.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\DelayDecorator.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\ExpressionNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\NumericRangeNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\VariableNode.cs" />
+    <Compile Include="Model\SequenceTree\PlaybackContext.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\IAlias.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\IAliasEntryNode.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\IAudioNode.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\IDecoratorNode.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\ISequenceNode.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\IValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Alias\Alias.cs" />
+    <Compile Include="Model\SequenceTree\Base\Audio\AudioCollectionNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Audio\AudioDecoratorNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Audio\AudioNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Audio\ValuePlaybackNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Alias\AliasEntryNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\DecoratorNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\SequenceCollectionNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\SequenceNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Value\ValueCollectionNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Value\ValueModifierNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Value\ValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Alias\AudioAlias.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Alias\AudioAliasNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Alias\ValueAlias.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Alias\ValueAliasNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\AudioFileNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\LoopDecorator.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\SpeedDecorator.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\VolumeDecorator.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\Collection\ParallelAudioNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\Collection\SequentialAudioNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\TTSNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\JoinValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\RandomValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\TextValueNode.cs" />
+    <Compile Include="NodeFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\AttributeField.cs" />
+    <Compile Include="Reflection\Attributes\XmlAttributeBinding.cs" />
+    <Compile Include="Reflection\Attributes\XmlElementBinding.cs" />
+    <Compile Include="Reflection\XmlBinder.cs" />
+    <Compile Include="ResourceManager.cs" />
+    <Compile Include="SpeechManager.cs" />
+    <Compile Include="Utils\ReflectionUtils.cs" />
+    <Compile Include="Utils\SampleProviderUtils.cs" />
+    <Compile Include="Utils\ExpressionUtils.cs" />
+    <Compile Include="Utils\ValueUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NAudio\NAudio.csproj">
+      <Project>{da4f02e3-0b5e-42cd-b8d9-5583fa51d66e}</Project>
+      <Name>NAudio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

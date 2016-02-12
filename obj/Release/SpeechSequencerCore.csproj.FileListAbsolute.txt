@@ -1,0 +1,7 @@
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\bin\Release\SpeechSequencerCore.dll
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\bin\Release\SpeechSequencerCore.pdb
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\bin\Release\NAudio.dll
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\bin\Release\NAudio.pdb
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\bin\Release\NAudio.xml
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\obj\Release\SpeechSequencerCore.dll
+F:\Development\Visual Studio Projects\TemplateSpeaker\SpeechSequencerCore\obj\Release\SpeechSequencerCore.pdb
