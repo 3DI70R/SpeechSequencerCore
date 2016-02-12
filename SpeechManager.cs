@@ -32,7 +32,6 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         public SpeechSynthesizer GetVoice(string voiceName)
         {
             SpeechSynthesizer synth = new SpeechSynthesizer();
-            synth.SelectVoice("IVONA 2 Maxim OEM");
             return synth;
         }
     }

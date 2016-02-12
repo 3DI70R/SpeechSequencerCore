@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A1BA2CB-18C5-4F82-A8B9-80462B78EE6B}</ProjectGuid>
+    <ProjectGuid>{E0B9CBF4-9091-4F79-AB15-0B7755BA2F81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ThreeDISevenZeroR.SpeechSequencer.Core</RootNamespace>
