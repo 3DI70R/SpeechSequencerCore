@@ -80,13 +80,13 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             {
                 switch (node.Term.Name)
                 {
-                    case "Text":
+                    case SpeechExpression.TextLiteralName:
                         funcList.Add(BuildTextCreator(node, context));
                         break;
-                    case "Alias":
+                    case SpeechExpression.AliasLiteralName:
                         funcList.Add(BuildAliasCreator(node, context));
                         break;
-                    case "Variable":
+                    case SpeechExpression.VariableLiteralName:
                         funcList.Add(BuildVariableCreator(node, context));
                         break;
                 }
@@ -115,8 +115,8 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
         private static Func<ISequenceNode> BuildAliasCreator(ParseTreeNode node, IPlaybackContext context)
         {
-            ParseTreeNode nameNode = FindNode(node, "Name");
-            ParseTreeNode argsNode = FindNode(node, "ArgumentList");
+            ParseTreeNode nameNode = FindNode(node, SpeechExpression.NameLiteralName);
+            ParseTreeNode argsNode = FindNode(node, SpeechExpression.ArgumentListLiteralName);
 
             string aliasName = nameNode.Token.Text;
             List<Func<ISequenceNode>> funcCreators = new List<Func<ISequenceNode>>();
@@ -147,7 +147,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
         private static Func<ISequenceNode> BuildVariableCreator(ParseTreeNode node, IPlaybackContext context)
         {
-            ParseTreeNode nameNode = FindNode(node, "Name");
+            ParseTreeNode nameNode = FindNode(node, SpeechExpression.NameLiteralName);
 
             string varName = nameNode.Token.Text;
 

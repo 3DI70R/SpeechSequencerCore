@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioManager.cs" />
-    <Compile Include="Expressions\ExpressionGrammar.cs" />
+    <Compile Include="Expressions\SpeechExpression.cs" />
     <Compile Include="Expressions\ExpressionParser.cs" />
     <Compile Include="Model\Components\Context\IPlaybackContext.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\DelayDecorator.cs" />
