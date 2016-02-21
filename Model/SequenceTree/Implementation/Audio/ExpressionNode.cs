@@ -15,7 +15,8 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core.Model.SequenceTree.Implementati
         protected override ISampleProvider CreateProvider(string value, IPlaybackContext context)
         {
             IAudioNode node;
-            node = ExpressionUtils.EvaluateFreeformExpressionAsAudio(ValueHolder.Value, context);
+            
+            node = ExpressionParser.ParseExpression(value, context)().ToAudio();
             node.InitNewState(context);
 
             return node;

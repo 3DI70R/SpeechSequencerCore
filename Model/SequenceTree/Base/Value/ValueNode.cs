@@ -8,9 +8,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     public abstract class ValueNode : SequenceNode, IValueNode
     {
-        private string m_value;
-
-        public virtual string Value { get { return m_value; } }
+        public virtual string Value { get; set; } = string.Empty;
 
         public override void InitNewState(IPlaybackContext context)
         {
@@ -18,14 +16,19 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
             try
             {
-                m_value = LoadValue(context);
+                Value = LoadValue(context);
             }
             catch (Exception e)
             {
-                m_value = "Произошла ошибка: " + e.Message;
+                Value = "Произошла ошибка: " + e.Message;
             }
         }
 
         public abstract string LoadValue(IPlaybackContext context);
+
+        public override IAudioNode ToAudio()
+        {
+            return ValueUtils.WrapValueAsSpeech(this);
+        }
     }
 }

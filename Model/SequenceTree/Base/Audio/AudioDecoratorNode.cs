@@ -28,7 +28,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public void InitDecorator(IPlaybackContext context)
         {
-            XmlBinder.BindValues(this, XmlData, context);
+            if(XmlData != null)
+            {
+                XmlBinder.BindValues(this, XmlData, context);
+            }
         }
     }
 }

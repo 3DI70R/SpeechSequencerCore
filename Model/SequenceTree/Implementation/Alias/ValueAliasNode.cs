@@ -17,5 +17,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
 
         public ValueAliasNode(IValueNode node) : base(node) { }
+
+        public override IAudioNode ToAudio()
+        {
+            return ValueUtils.WrapValueAsSpeech(this);
+        }
     }
 }

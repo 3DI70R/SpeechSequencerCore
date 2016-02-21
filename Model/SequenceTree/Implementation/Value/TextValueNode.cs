@@ -10,10 +10,8 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     [XmlElementBinding("Value")]
     [Description("Возвращает внутренний текст в виде значения")]
-    public class TextValueNode : SequenceNode, IValueNode
+    public class TextValueNode : ValueNode
     {
-        public string Value { get; set; } = string.Empty;
-
         public TextValueNode() { }
         public TextValueNode(string textValue)
         {
@@ -24,6 +22,11 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             Value = element.InnerText.Trim();
             base.LoadDataFromXml(element, context);
+        }
+
+        public override string LoadValue(IPlaybackContext context)
+        {
+            return Value;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public class AliasEntryNode<T> : SequenceNode, IAliasEntryNode where T : ISequenceNode
+    public abstract class AliasEntryNode<T> : SequenceNode, IAliasEntryNode where T : ISequenceNode
     {
         private T m_wrappedNode;
         private Dictionary<string, Func<ISequenceNode>> m_variables = new Dictionary<string, Func<ISequenceNode>>();

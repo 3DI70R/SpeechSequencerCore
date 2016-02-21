@@ -12,5 +12,6 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         XmlElement XmlData { get; set; }
 
         void InitNewState(IPlaybackContext context);
+        IAudioNode ToAudio();
     }
 }

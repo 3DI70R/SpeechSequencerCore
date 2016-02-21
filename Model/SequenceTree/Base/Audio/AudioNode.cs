@@ -11,5 +11,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public abstract WaveFormat WaveFormat { get; }
         public abstract int Read(float[] buffer, int offset, int count);
+
+        public override IAudioNode ToAudio()
+        {
+            return this;
+        }
     }
 }

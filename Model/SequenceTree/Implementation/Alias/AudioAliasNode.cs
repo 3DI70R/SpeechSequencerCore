@@ -23,5 +23,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             return WrappedNode.Read(buffer, offset, count);
         }
+
+        public override IAudioNode ToAudio()
+        {
+            return this;
+        }
     }
 }

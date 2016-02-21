@@ -20,5 +20,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                     CreateParametersFromXml(e, context));
             });
         }
+
+        public override IAudioNode ToAudio()
+        {
+            return ValueUtils.WrapValueAsSpeech(this);
+        }
     }
 }

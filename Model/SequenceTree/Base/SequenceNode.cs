@@ -12,6 +12,8 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         public XmlElement XmlData { get; set; }
         public IPlaybackContext Context { get; set; }
 
+        public abstract IAudioNode ToAudio();
+
         public virtual void InitNewState(IPlaybackContext context)
         {
             if (XmlData != null)

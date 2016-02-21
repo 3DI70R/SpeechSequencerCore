@@ -59,20 +59,17 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
             if(Type == VariableType.Audio)
             {
-                if(node is IAudioNode)
-                {
-                    m_audioNode = (IAudioNode)node;
-                }
-                else if(node is IValueNode)
-                {
-                    m_audioNode = ExpressionUtils.WrapValueAsSpeech((IValueNode) node);
-                    m_audioNode.InitNewState(context);
-                }
+                m_audioNode = node.ToAudio();
             }
             else
             {
-                m_valueNode = (IValueNode)node;
+                m_valueNode = (IValueNode) node;
             }
+        }
+
+        public override IAudioNode ToAudio()
+        {
+            return this;
         }
     }
 }
