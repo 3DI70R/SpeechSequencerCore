@@ -88,14 +88,14 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             {
                 foreach(IAlias alias in NodeFactory.Instance.CreateChildrenAlias(element))
                 {
-                    m_aliases[alias.Name] = alias;
+                    m_aliases[alias.Name.ToLowerInvariant()] = alias;
                 }
             }
         }
 
         public IAlias GetAlias(string aliasName)
         {
-            return m_aliases[aliasName];
+            return m_aliases[aliasName.ToLowerInvariant()];
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         public SpeechExpression()
         {
             FreeTextLiteral text = new FreeTextLiteral(TextLiteralName, FreeTextOptions.AllowEof, AliasSymbol, VarSymbol, OpenBracketSymbol, ArgSeparatorSymbol, CloseBracketSymbol);
-            IdentifierTerminal name = new IdentifierTerminal(NameLiteralName);
+            IdentifierTerminal name = TerminalFactory.CreateCSharpIdentifier(NameLiteralName);
 
             NonTerminal root = new NonTerminal(RootExpressionName);
             NonTerminal expression = new NonTerminal(ExpressionLiteralName);

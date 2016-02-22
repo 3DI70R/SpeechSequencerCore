@@ -21,9 +21,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             ParseTree tree = parser.Parse(expression);
 
-            if(tree.Root.IsError)
+            if(tree.Status == ParseTreeStatus.Error)
             {
-                throw new FormatException("Invalid Expression " + tree.Root.Comments);
+                throw new FormatException("Invalid Expression " + tree.ParserMessages[0].Message);
             }
 
             return BuildExpressionCreator(tree.Root, context);
