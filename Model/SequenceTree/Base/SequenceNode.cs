@@ -16,6 +16,8 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public virtual void InitNewState(IPlaybackContext context)
         {
+            Context = context;
+
             if (XmlData != null)
             {
                 LoadDataFromXml(XmlData, context);
@@ -24,7 +26,6 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         protected virtual void LoadDataFromXml(XmlElement element, IPlaybackContext context)
         {
-            Context = context;
             XmlBinder.BindValues(this, element, context);
         }
 

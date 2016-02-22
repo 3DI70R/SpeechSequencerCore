@@ -13,7 +13,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             get
             {
-                return WrappedNode.WaveFormat;
+                return RootNode.WaveFormat;
             }
         }
 
@@ -21,7 +21,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public int Read(float[] buffer, int offset, int count)
         {
-            return WrappedNode.Read(buffer, offset, count);
+            return RootNode.Read(buffer, offset, count);
         }
 
         public override IAudioNode ToAudio()

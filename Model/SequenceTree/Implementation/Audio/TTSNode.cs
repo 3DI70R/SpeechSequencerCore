@@ -17,7 +17,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         private SpeechSynthesizer m_synth;
 
         [XmlAttributeBinding]
-        public string Voice { get; set; } = null;
+        public string Voice { get; set; } = string.Empty;
 
         public TTSNode()
         {
@@ -31,15 +31,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         protected override ISampleProvider CreateProvider(string value, IPlaybackContext context)
         {
-            MemoryStream stream = new MemoryStream();
-
-            m_synth = SpeechManager.Instance.GetVoice(Voice);
-            m_synth.SetOutputToWaveStream(stream);
-
-            m_synth.Speak(GetTextToSpeak());
-            stream.Position = 0;
-
-            return new WaveFileReader(stream).ToSampleProvider();
+            return SpeechManager.Instance.SpeakText(value, Voice);
         }
     }
 }

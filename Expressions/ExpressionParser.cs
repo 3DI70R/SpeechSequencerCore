@@ -20,6 +20,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         public static Func<ISequenceNode> ParseExpression(string expression, IPlaybackContext context)
         {
             ParseTree tree = parser.Parse(expression);
+
+            if(tree.Root.IsError)
+            {
+                throw new FormatException("Invalid Expression " + tree.Root.Comments);
+            }
+
             return BuildExpressionCreator(tree.Root, context);
         }
 

@@ -54,7 +54,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public Func<ISequenceNode> GetDefaultArgumentValue(int index)
         {
-            throw new NotImplementedException();
+            return () => new TextValueNode("");
         }
 
         public void InitFromXml(XmlElement element)

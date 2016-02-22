@@ -8,20 +8,20 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     public abstract class AliasEntryNode<T> : SequenceNode, IAliasEntryNode where T : ISequenceNode
     {
-        private T m_wrappedNode;
+        private T m_rootNode;
         private Dictionary<string, Func<ISequenceNode>> m_variables = new Dictionary<string, Func<ISequenceNode>>();
 
-        public T WrappedNode
+        public T RootNode
         {
             get
             {
-                return m_wrappedNode;
+                return m_rootNode;
             }
         }
 
         public AliasEntryNode(T node)
         {
-            m_wrappedNode = node;
+            m_rootNode = node;
         }
 
         public void OverrideVariableCreator(string varName, Func<ISequenceNode> creator)
@@ -39,7 +39,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
 
             base.InitNewState(cloned);
-            m_wrappedNode.InitNewState(cloned);
+            m_rootNode.InitNewState(cloned);
         }
     }
 }
