@@ -9,9 +9,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     [XmlElementBinding("AudioAlias")]
     public class AudioAlias : Alias
     {
-        public override IAliasEntryNode CreateNode()
+        public override IAliasEntryNode CreateNode(IPlaybackContext context)
         {
-            return new AudioAliasNode(NodeFactory.Instance.CreateChildrenAsSingleAudio(XmlData));
+            return new AudioAliasNode(NodeFactory.Instance.CreateChildrenAsSingleAudio(XmlData, context));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public override IAudioNode ToAudio()
         {
-            return ValueUtils.WrapValueAsSpeech(this, Context);
+            return ValueUtils.WrapValueAsSpeech(this);
         }
     }
 }

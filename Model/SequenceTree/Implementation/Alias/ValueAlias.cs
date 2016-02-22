@@ -9,7 +9,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     [XmlElementBinding("ValueAlias")]
     public class ValueAlias : Alias
     {
-        public override IAliasEntryNode CreateNode()
+        public override IAliasEntryNode CreateNode(IPlaybackContext context)
         {
             return new ValueAliasNode(NodeFactory.Instance.CreateChildrenAsSingleValue(XmlData));
         }

@@ -141,13 +141,13 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         #endregion
 
         #region Audio
-        public IAudioNode CreateChildrenAsSingleAudio(XmlElement element)
+        public IAudioNode CreateChildrenAsSingleAudio(XmlElement element, IPlaybackContext context)
         {
             SequentialAudioNode nodeList = new SequentialAudioNode();
 
             EnumerateChildAudio(element, (e) =>
             {
-                nodeList.AddNode(CreateAudioNode(e));
+                nodeList.AddNode(CreateAudioNode(e, context));
             });
 
             return nodeList;
@@ -205,17 +205,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
         public IAudioNode CreateAudioNode(XmlElement element, IPlaybackContext context)
         {
-            return DecorateAudioNode(CreateAudioNode(element), element, context);
-        }
-        private IAudioNode CreateAudioNode(XmlElement element)
-        {
-            IAudioNode audio = CreateAudioNode(element.LocalName);
+            IAudioNode audio = m_audioNodeCtors[element.LocalName]();
             audio.XmlData = element;
-            return audio;
-        }
-        private IAudioNode CreateAudioNode(string nodeName)
-        {
-            return m_audioNodeCtors[nodeName]();
+
+            return DecorateAudioNode(audio, element, context);
         }
         #endregion
 

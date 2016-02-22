@@ -45,7 +45,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public abstract IAliasEntryNode CreateNode();
+        public abstract IAliasEntryNode CreateNode(IPlaybackContext context);
 
         public string GetAliasArgumentName(int index)
         {

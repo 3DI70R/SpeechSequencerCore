@@ -55,15 +55,16 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             base.InitNewState(context);
 
             ISequenceNode node = context.GetVariableNode(Name);
-            node.InitNewState(context);
-
+ 
             if(Type == VariableType.Audio)
             {
                 m_audioNode = node.ToAudio();
+                m_audioNode.InitNewState(context);
             }
             else
             {
                 m_valueNode = (IValueNode) node;
+                m_valueNode.InitNewState(context);
             }
         }
 

@@ -139,7 +139,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
             return () =>
             {
-                IAliasEntryNode entry = alias.CreateNode();
+                IAliasEntryNode entry = alias.CreateNode(context);
 
                 for (int i = 0; i < alias.ArgumentCount; i++)
                 {

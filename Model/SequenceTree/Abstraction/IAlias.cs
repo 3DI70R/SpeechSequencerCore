@@ -16,7 +16,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         string GetAliasArgumentName(int index);
         Func<ISequenceNode> GetDefaultArgumentValue(int index);
 
-        IAliasEntryNode CreateNode();
+        IAliasEntryNode CreateNode(IPlaybackContext context);
         void InitFromXml(XmlElement element);
     }
 }

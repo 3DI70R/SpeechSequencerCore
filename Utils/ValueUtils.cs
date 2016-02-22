@@ -32,15 +32,14 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return builder.ToString();
         }
 
-        public static IAudioNode WrapStringAsSpeech(this string text, IPlaybackContext context)
+        public static IAudioNode WrapStringAsSpeech(this string text)
         {
-            return WrapValueAsSpeech(new TextValueNode(text), context);
+            return WrapValueAsSpeech(new TextValueNode(text));
         }
-        public static IAudioNode WrapValueAsSpeech(this IValueNode value, IPlaybackContext context)
+        public static IAudioNode WrapValueAsSpeech(this IValueNode value)
         {
             TTSNode node = new TTSNode();
             node.ValueHolder = value;
-            node.InitNewState(context);
             return node;
         }
     }

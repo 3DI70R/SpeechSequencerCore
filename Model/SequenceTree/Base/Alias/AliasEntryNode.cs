@@ -31,6 +31,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public override void InitNewState(IPlaybackContext context)
         {
+            Context = context;
             IPlaybackContext cloned = context.Clone();
 
             foreach(KeyValuePair<string, Func<ISequenceNode>> pair in m_variables)

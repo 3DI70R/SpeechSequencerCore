@@ -41,7 +41,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             m_waveOut = new WaveOut();
             m_waveOut.NumberOfBuffers = 4;
-            //m_waveOut.DeviceNumber = 3;
+            //m_waveOut.DeviceNumber = 2;
             m_waveFormat = WaveFormat.CreateIeeeFloatWaveFormat(44000, 2);
         }
 
