@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public class NodeFactory
+    public class ObjectFactory
     {
         private struct DecoratorInfo
         {
@@ -37,10 +37,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        private static readonly NodeFactory s_instance = new NodeFactory();
-        public static NodeFactory Instance { get { return s_instance; } }
+        private static readonly ObjectFactory s_instance = new ObjectFactory();
+        public static ObjectFactory Instance { get { return s_instance; } }
 
-        private NodeFactory()
+        private ObjectFactory()
         {
             foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -99,7 +99,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                 decorator.ctor = (Func<IDecoratorNode>)type.CreateConstructorDelegate(typeof(Func<>).MakeGenericType(type));
                 decorator.triggeredProperties = new HashSet<string>();
 
-                foreach (AttributeProperty property in type.GetAttributeProperties())
+                foreach (AbstractAttributeField property in type.GetAttributeProperties())
                 {
                     decorator.triggeredProperties.Add(property.Name);
                 }

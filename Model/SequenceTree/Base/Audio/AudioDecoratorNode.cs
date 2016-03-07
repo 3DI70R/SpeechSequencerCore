@@ -30,7 +30,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             if(XmlData != null)
             {
-                XmlBinder.BindValues(this, XmlData, context);
+                ValueBinder.BindValues(this, XmlData, context);
             }
         }
     }

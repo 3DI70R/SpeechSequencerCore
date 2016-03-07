@@ -10,6 +10,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     public interface ITTSEngine
     {
+        [XmlAttributeBinding]
         string Name { get; }
 
         ISampleProvider SpeakText(string text);

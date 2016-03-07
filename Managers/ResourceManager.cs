@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,21 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     public class ResourceManager
     {
+        public const string VariableNamespace = "Variable";
+
         private const string c_configOptionsFile = "Config.xml";
         private const string c_resourcesFolder = "Resources";
+
         private const string c_configAliasCollectionNode = "AliasCollection";
         private const string c_configOptionsCollectionNode = "Options";
-        private const string c_configOptionsExtraNode = "ExtraData";
+        private const string c_configOptionsConstantsNode = "Constants";
+        private const string c_configVoicesCollectionNode = "Voices";
 
         private static ResourceManager s_instance = new ResourceManager();
-
-        private Dictionary<string, IAlias> m_aliases = new Dictionary<string, IAlias>();
-
         public static ResourceManager Instance { get { return s_instance; } }
+
+        private Dictionary<string, string> m_constants = new Dictionary<string, string>();
+        private Dictionary<string, IAlias> m_aliases = new Dictionary<string, IAlias>();
 
         private ResourceManager()
         {
@@ -34,14 +39,57 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             XmlElement root = document.CreateElement("Config");
 
             document.AppendChild(root);
-            root.AppendChild(document.CreateElement(c_configAliasCollectionNode));
+            root.AppendChild(document.CreateElement(c_configOptionsConstantsNode));
             root.AppendChild(document.CreateElement(c_configOptionsCollectionNode));
-            root.AppendChild(document.CreateElement(c_configOptionsExtraNode));
-            document.DocumentElement.SetAttribute("xmlns:var", XmlBinder.c_varNamespace);
+            root.AppendChild(document.CreateElement(c_configAliasCollectionNode));
+            root.AppendChild(document.CreateElement(c_configVoicesCollectionNode));
+            document.DocumentElement.SetAttribute("xmlns:var", VariableNamespace);
 
             document.Save(path);
         }
-        private XmlDocument LoadDocument(string path)
+
+        public void AppendConstants(XmlElement element)
+        {
+            foreach(XmlNode node in element.ChildNodes)
+            {
+                if(node is XmlElement)
+                {
+                    try
+                    {
+                        XmlElement child = (XmlElement)node;
+                        string key = child.GetAttributeNode("Name").Value;
+                        string value = child.InnerText;
+
+                        m_constants[key] = value;
+                    }
+                    catch(Exception e)
+                    {
+                        Debug.Print(e.ToString());
+                    }
+                }
+            }
+        }
+        public string GetConstant(string name)
+        {
+            return m_constants[name];
+        }
+
+        public void AppendAliases(XmlElement element)
+        {
+            if (element != null)
+            {
+                foreach (IAlias alias in ObjectFactory.Instance.CreateChildrenAlias(element))
+                {
+                    m_aliases[alias.Name.ToLowerInvariant()] = alias;
+                }
+            }
+        }
+        public IAlias GetAlias(string aliasName)
+        {
+            return m_aliases[aliasName.ToLowerInvariant()];
+        }
+
+        /*private XmlDocument LoadDocument(string path)
         {
             XmlDocument document = new XmlDocument();
             document.Load(path);
@@ -82,20 +130,6 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             AddAliases(element[c_configAliasCollectionNode]);
         }
 
-        public void AddAliases(XmlElement element)
-        {
-            if(element != null)
-            {
-                foreach(IAlias alias in NodeFactory.Instance.CreateChildrenAlias(element))
-                {
-                    m_aliases[alias.Name.ToLowerInvariant()] = alias;
-                }
-            }
-        }
-
-        public IAlias GetAlias(string aliasName)
-        {
-            return m_aliases[aliasName.ToLowerInvariant()];
-        }
+        */
     }
 }

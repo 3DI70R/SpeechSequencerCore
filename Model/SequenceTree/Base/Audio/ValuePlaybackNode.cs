@@ -36,7 +36,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         protected override void LoadDataFromXml(XmlElement element, IPlaybackContext context)
         {
             base.LoadDataFromXml(element, context);
-            ValueHolder = NodeFactory.Instance.CreateChildrenAsSingleValue(element);
+            ValueHolder = ObjectFactory.Instance.CreateChildrenAsSingleValue(element);
         }
 
         protected abstract ISampleProvider CreateProvider(string value, IPlaybackContext context); 

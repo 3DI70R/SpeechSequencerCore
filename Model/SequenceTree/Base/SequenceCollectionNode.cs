@@ -85,7 +85,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         protected virtual P CreateParametersFromXml(XmlElement element, IPlaybackContext context)
         {
             P parameters = new P();
-            XmlBinder.BindValues(parameters, element, context);
+            ValueBinder.BindValues(parameters, element, context);
             return parameters;
         }
     }

@@ -10,6 +10,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public string Name;
 
+        public XmlElementBinding() { }
         public XmlElementBinding(string name)
         {
             this.Name = name;

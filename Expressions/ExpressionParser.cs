@@ -13,13 +13,17 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         private static readonly SpeechExpression expression = new SpeechExpression();
         private static readonly Parser parser = new Parser(expression);
 
+        public static ParseTree ParseExpressionToTree(string text)
+        {
+            return parser.Parse(text);
+        }
         public static Func<ISequenceNode> ParseExpression(string expression)
         {
             return ParseExpression(expression, new PlaybackContext());
         }
         public static Func<ISequenceNode> ParseExpression(string expression, IPlaybackContext context)
         {
-            ParseTree tree = parser.Parse(expression);
+            ParseTree tree = ParseExpressionToTree(expression);
 
             if(tree.Status == ParseTreeStatus.Error)
             {

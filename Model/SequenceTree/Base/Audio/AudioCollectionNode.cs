@@ -22,10 +22,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         protected override void LoadChildsFromXml(XmlElement element, IPlaybackContext context)
         {
-            NodeFactory.Instance.EnumerateChildAudio(element, (e) =>
+            ObjectFactory.Instance.EnumerateChildAudio(element, (e) =>
             {
                 AddNode(
-                    NodeFactory.Instance.CreateAudioNode(e, context),
+                    ObjectFactory.Instance.CreateAudioNode(e, context),
                     CreateParametersFromXml(e, context));
             });
         }

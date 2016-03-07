@@ -11,7 +11,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public override IAliasEntryNode CreateNode(IPlaybackContext context)
         {
-            return new ValueAliasNode(NodeFactory.Instance.CreateChildrenAsSingleValue(XmlData));
+            return new ValueAliasNode(ObjectFactory.Instance.CreateChildrenAsSingleValue(XmlData));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
         protected override void LoadDataFromXml(XmlElement element, IPlaybackContext context)
         {
-            ChildValue = NodeFactory.Instance.CreateChildrenAsSingleValue(element);
+            ChildValue = ObjectFactory.Instance.CreateChildrenAsSingleValue(element);
         }
 
         public abstract string ProcessValue(string value);

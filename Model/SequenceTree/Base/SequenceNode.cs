@@ -26,7 +26,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         protected virtual void LoadDataFromXml(XmlElement element, IPlaybackContext context)
         {
-            XmlBinder.BindValues(this, element, context);
+            ValueBinder.BindValues(this, element, context);
         }
 
         public virtual void Dispose() { }

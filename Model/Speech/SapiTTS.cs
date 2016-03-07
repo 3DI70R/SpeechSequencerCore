@@ -23,6 +23,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
+        [XmlAttributeBinding]
         public string VoiceName
         {
             get
@@ -35,6 +36,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
+        [XmlAttributeBinding]
         public int Rate
         {
             get
@@ -76,6 +78,11 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
 
             return voices.ToArray();
+        }
+
+        public ITTSEngine Clone()
+        {
+            return null;
         }
     }
 }
