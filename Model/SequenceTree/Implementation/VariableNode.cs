@@ -16,10 +16,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             Audio,
             Value,
+            Auto
         }
 
         private IValueNode m_valueNode;
         private IAudioNode m_audioNode;
+        private ISequenceNode m_sequence;
 
         [XmlAttributeBinding]
         [Description("Имя переменной, значение которой нужно загрузить")]
@@ -27,12 +29,18 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         [XmlAttributeBinding]
         [Description("Тип переменной")]
-        public VariableType Type { get; set; } = VariableType.Value;
+        public VariableType Type { get; set; } = VariableType.Auto;
 
         public string Value
         {
             get
             {
+                if(Type == VariableType.Auto && m_valueNode == null)
+                {
+                    m_valueNode = (IValueNode) m_sequence;
+                    m_valueNode.InitNewState(Context);
+                }
+
                 return m_valueNode.Value;
             }
         }
@@ -47,6 +55,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public int Read(float[] buffer, int offset, int count)
         {
+            if(Type == VariableType.Auto && m_audioNode == null)
+            {
+                m_audioNode = m_sequence.ToAudio();
+                m_audioNode.InitNewState(Context);
+            }
+
             return m_audioNode.Read(buffer, offset, count);
         }
 
@@ -54,16 +68,16 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             base.InitNewState(context);
 
-            ISequenceNode node = context.GetVariableNode(Name);
+            m_sequence = context.GetVariableNode(Name);
  
             if(Type == VariableType.Audio)
             {
-                m_audioNode = node.ToAudio();
+                m_audioNode = m_sequence.ToAudio();
                 m_audioNode.InitNewState(context);
             }
-            else
+            else if(Type == VariableType.Value)
             {
-                m_valueNode = (IValueNode) node;
+                m_valueNode = (IValueNode) m_sequence;
                 m_valueNode.InitNewState(context);
             }
         }
