@@ -12,6 +12,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     [Description("Воспроизводит аудио файл указанный как значение")]
     public class AudioFileNode : ValuePlaybackNode
     {
+        public AudioFileNode() { }
+        public AudioFileNode(string filePath)
+        {
+            ValueHolder = new TextValueNode(filePath);
+        }
+
         protected override ISampleProvider CreateProvider(string value, IPlaybackContext context)
         {
             return new AudioFileReader(ValueHolder.Value);

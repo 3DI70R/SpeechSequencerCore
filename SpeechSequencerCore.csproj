@@ -22,7 +22,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -53,6 +53,8 @@
     <Compile Include="Expressions\SpeechExpression.cs" />
     <Compile Include="Expressions\ExpressionParser.cs" />
     <Compile Include="Model\Components\Context\IPlaybackContext.cs" />
+    <Compile Include="Model\SequenceTree\Base\Audio\MultiUseAudioCollectionNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\Audio\NoteSequencerNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\DelayDecorator.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\ExpressionNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Value\NumericRangeNode.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Model\SequenceTree\Base\Audio\AudioNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\ValuePlaybackNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Alias\AliasEntryNode.cs" />
-    <Compile Include="Model\SequenceTree\Base\SequenceCollectionNode.cs" />
+    <Compile Include="Model\SequenceTree\Base\CollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\SequenceNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Value\ValueCollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Value\ValueModifierNode.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Model\Speech\Abstraction\ITTSEngine.cs" />
     <Compile Include="Model\Speech\NetworkTTS.cs" />
     <Compile Include="Model\Speech\SapiTTS.cs" />
+    <Compile Include="Utils\CachedSample.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Utils\SampleProviderUtils.cs" />
     <Compile Include="Utils\ValueUtils.cs" />

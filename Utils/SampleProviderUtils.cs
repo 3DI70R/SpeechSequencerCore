@@ -64,5 +64,27 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
             writer.Flush();
         }
+
+        public static Func<ISampleProvider> CreateCachedFactory(this ISampleProvider originalSample)
+        {
+            List<float> totalSamples = new List<float>();
+            float[] buffer = new float[44000];
+
+            int readed = 0;
+            while ((readed = originalSample.Read(buffer, 0, buffer.Length)) != 0)
+            {
+                for (int i = 0; i < readed; i++)
+                {
+                    totalSamples.Add(buffer[i]);
+                }
+            }
+
+            float[] samples = totalSamples.ToArray();
+
+            return () =>
+            {
+                return new CachedSample(originalSample.WaveFormat, samples);
+            };
+        }
     }
 }

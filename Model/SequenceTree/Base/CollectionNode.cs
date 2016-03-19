@@ -8,8 +8,7 @@ using System.Xml;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public abstract class SequenceCollectionNode<N, P> : SequenceNode
-        where N : ISequenceNode
+    public abstract class CollectionNode<N, P> : SequenceNode
         where P : new ()
     {
         private struct NodeInfo

@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public abstract class ValueCollectionNode<P> : SequenceCollectionNode<IValueNode, P>, IValueNode where P : new()
+    public abstract class ValueCollectionNode<P> : CollectionNode<IValueNode, P>, IValueNode where P : new()
     {
         public abstract string Value { get; }
 

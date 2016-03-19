@@ -8,9 +8,9 @@ using NAudio.Wave;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public abstract class AudioCollectionNode<P> : CollectionNode<IAudioNode, P>, IAudioNode where P : new()
+    public abstract class MultiUseAudioCollectionNode<P> : CollectionNode<Func<IAudioNode>, P>, IAudioNode where P : new()
     {
-        public virtual WaveFormat WaveFormat
+        public WaveFormat WaveFormat
         {
             get
             {
@@ -20,19 +20,21 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public abstract int Read(float[] buffer, int offset, int count);
 
+        public override IAudioNode ToAudio()
+        {
+            return this;
+        }
+
         protected override void LoadChildsFromXml(XmlElement element, IPlaybackContext context)
         {
             ObjectFactory.Instance.EnumerateChildAudio(element, (e) =>
             {
-                AddNode(
-                    ObjectFactory.Instance.CreateAudioNode(e, context),
-                    CreateParametersFromXml(e, context));
+                AddNode(() =>
+                {
+                    return ObjectFactory.Instance.CreateAudioNode(e, context);
+                },
+                CreateParametersFromXml(e, context));
             });
-        }
-
-        public override IAudioNode ToAudio()
-        {
-            return this;
         }
     }
 }
