@@ -26,8 +26,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             public int fadeOutStart;
             public int bufferStartTick;
             public int bufferActualLength;
+            public float volume;
 
-            public PlayingSample(ISampleProvider sample, int channel, int currentTick)
+            public PlayingSample(ISampleProvider sample, int channel, float volume, int currentTick)
             {
                 this.channel = channel;
                 this.sourceSample = sample;
@@ -35,6 +36,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                 this.bufferStartTick = currentTick;
                 this.playbackStartTick = currentTick;
                 this.fadeOutStart = int.MaxValue;
+                this.volume = volume;
 
                 FillBufferWithAnotherChunkOfData();
             }
@@ -84,7 +86,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                     PlayingSample sample = m_playingSamples[j];
 
                     int fadeCount = (m_currentTick - m_currentTick % 2) - sample.fadeOutStart;
-                    float fadeOut = 1;
+                    float volume = sample.volume;
 
                     if(fadeCount > 0)
                     {
@@ -92,12 +94,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
                         if(fadeFactor > 1)
                         {
-                            fadeOut = 0;
+                            volume = 0;
                             sample.bufferActualLength = 0;
                         }
                         else
                         {
-                            fadeOut = 1 - fadeFactor;
+                            volume *= (1 - fadeFactor);
                         }
                     }
 
@@ -117,7 +119,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                     }
                     else
                     {
-                        buffer[bufferIndex] += sample.buffer[sampleBufferIndex] * fadeOut;
+                        buffer[bufferIndex] += sample.buffer[sampleBufferIndex] * volume;
                     }
                 }
 
@@ -133,9 +135,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             m_playingSamples.Clear();
         }
 
-        public void PlaySound(ISampleProvider sample, int channel)
+        public void PlaySound(ISampleProvider sample, int channel, float volume)
         {
-            m_playingSamples.Add(new PlayingSample(sample, channel, m_currentTick));
+            m_playingSamples.Add(new PlayingSample(sample, channel, volume, m_currentTick));
         }
         public void FadeOut(int channel)
         {
