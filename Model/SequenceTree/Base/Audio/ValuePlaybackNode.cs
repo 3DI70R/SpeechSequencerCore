@@ -27,18 +27,18 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return m_provider.Read(buffer, offset, count);
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
             ValueHolder.InitNewState(context);
             m_provider = CreateProvider(ValueHolder.Value, context);
         }
-        protected override void LoadDataFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadDataFromXml(XmlElement element, Context context)
         {
             base.LoadDataFromXml(element, context);
-            ValueHolder = ObjectFactory.Instance.CreateChildrenAsSingleValue(element);
+            ValueHolder = (IValueNode) SequenceFactory.Instance.CreateChildrenAsSequence(element, context);
         }
 
-        protected abstract ISampleProvider CreateProvider(string value, IPlaybackContext context); 
+        protected abstract ISampleProvider CreateProvider(string value, Context context); 
     }
 }

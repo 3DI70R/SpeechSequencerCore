@@ -58,7 +58,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return maxReaded;
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
 

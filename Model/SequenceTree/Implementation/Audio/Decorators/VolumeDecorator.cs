@@ -17,19 +17,11 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         [Description("Громкость звука")]
         public float Volume { get; set; } = 1;
 
-        public override bool IsRedundant
-        {
-            get
-            {
-                return Volume == 1;
-            }
-        }
-
         public override int Read(float[] buffer, int offset, int count)
         {
             return m_volumeProvider.Read(buffer, offset, count);
         }
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
             m_volumeProvider = new VolumeSampleProvider(DecoratedNode);

@@ -13,14 +13,14 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public IValueNode ChildValue { get; set; } = new TextValueNode("");
 
-        public override string LoadValue(IPlaybackContext context)
+        public override string LoadValue(Context context)
         {
             ChildValue.InitNewState(context);
             return ProcessValue(ChildValue.Value);
         }
-        protected override void LoadDataFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadDataFromXml(XmlElement element, Context context)
         {
-            ChildValue = ObjectFactory.Instance.CreateChildrenAsSingleValue(element);
+            ChildValue = (IValueNode) SequenceFactory.Instance.CreateChildrenAsSequence(element, context);
         }
 
         public abstract string ProcessValue(string value);

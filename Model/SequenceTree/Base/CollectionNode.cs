@@ -73,15 +73,15 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return false;
         }
 
-        protected override void LoadDataFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadDataFromXml(XmlElement element, Context context)
         {
             base.LoadDataFromXml(element, context);
             m_nodes.Clear();
             LoadChildsFromXml(element, context);
         }
-        protected abstract void LoadChildsFromXml(XmlElement element, IPlaybackContext context);
+        protected abstract void LoadChildsFromXml(XmlElement element, Context context);
 
-        protected virtual P CreateParametersFromXml(XmlElement element, IPlaybackContext context)
+        protected virtual P CreateParametersFromXml(XmlElement element, Context context)
         {
             P parameters = new P();
             ValueBinder.BindValues(parameters, element, context);

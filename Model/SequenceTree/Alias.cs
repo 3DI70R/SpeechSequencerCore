@@ -7,27 +7,31 @@ using System.Xml;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public abstract class Alias : IAlias
+
+    /*
+        <Alias name="Test">
+
+            <Arguments>
+                <Argument name="arg1" />
+                <Argument name="arg2" />
+                <Argument name="arg3" >
+                    // default sequence for argument, optional
+                </Argument>
+            </Arguments>
+            
+            <Sequence>
+                // sequence
+            </Sequence>
+
+        </Alias>
+    */
+
+    [XmlElementBinding("Alias")]
+    public abstract class Alias
     {
         private string m_name;
         private string[] m_variables;
         private XmlElement m_xmlData;
-
-        public int ArgumentCount
-        {
-            get
-            {
-                return m_variables.Length;
-            }
-        }
-
-        public bool IsAudioAlias
-        {
-            get
-            {
-                return false;
-            }
-        }
 
         public string Name
         {
@@ -45,16 +49,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public abstract IAliasEntryNode CreateNode(IPlaybackContext context);
-
-        public string GetAliasArgumentName(int index)
+        public ISequenceNode CreateNode(Context context, params Func<ISequenceNode>[] arguments)
         {
-            return m_variables[index];
-        }
-
-        public Func<ISequenceNode> GetDefaultArgumentValue(int index)
-        {
-            return () => new TextValueNode("");
+            return null;
         }
 
         public void InitFromXml(XmlElement element)

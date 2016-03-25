@@ -20,12 +20,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public abstract int Read(float[] buffer, int offset, int count);
 
-        protected override void LoadChildsFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadChildsFromXml(XmlElement element, Context context)
         {
-            ObjectFactory.Instance.EnumerateChildAudio(element, (e) =>
+            SequenceFactory.Instance.EnumerateChildren(element, (e) =>
             {
                 AddNode(
-                    ObjectFactory.Instance.CreateAudioNode(e, context),
+                    SequenceFactory.Instance.CreateSequence(e, context).ToAudio(),
                     CreateParametersFromXml(e, context));
             });
         }

@@ -12,7 +12,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core.Model.SequenceTree.Implementati
     [Description("Воспроизводит выражение")]
     public class ExpressionNode : ValuePlaybackNode
     {
-        protected override ISampleProvider CreateProvider(string value, IPlaybackContext context)
+        protected override ISampleProvider CreateProvider(string value, Context context)
         {
             IAudioNode node;
             

@@ -25,7 +25,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
 

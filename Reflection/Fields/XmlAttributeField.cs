@@ -12,7 +12,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public XmlAttributeField(PropertyInfo property, string attributeName, Func<string, object> converter) : base(property, attributeName, converter) { }
 
-        public override string GetValueFromElement(XmlElement element, IPlaybackContext context)
+        public override string GetValueFromElement(XmlElement element, Context context)
         {
             if (element.HasAttribute(Name, string.Empty))
             {
@@ -20,7 +20,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
             else if (element.HasAttribute(Name, ResourceManager.VariableNamespace))
             {
-                IValueNode value = (IValueNode) context.GetVariableNode(element.GetAttribute(Name, ResourceManager.VariableNamespace));
+                IValueNode value = (IValueNode) context.GetVariable(element.GetAttribute(Name, ResourceManager.VariableNamespace));
                 value.InitNewState(context);
                 return value.Value;
             }
@@ -30,7 +30,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
                 if (valueNode != null)
                 {
-                    IValueNode value = ObjectFactory.Instance.CreateChildrenAsSingleValue(valueNode);
+                    IValueNode value = (IValueNode) SequenceFactory.Instance.CreateSequence(valueNode, context);
                     value.InitNewState(context);
                     return value.Value;
                 }

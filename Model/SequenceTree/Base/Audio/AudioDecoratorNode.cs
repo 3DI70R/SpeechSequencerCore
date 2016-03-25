@@ -7,10 +7,9 @@ using NAudio.Wave;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public abstract class AudioDecoratorNode : AudioNode, IDecoratorNode
+    public abstract class AudioDecoratorNode : AudioNode, IAudioDecoratorNode
     {
         public virtual IAudioNode DecoratedNode { get; set; }
-        public abstract bool IsRedundant { get; }
 
         public override WaveFormat WaveFormat
         {
@@ -20,18 +19,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
             DecoratedNode.InitNewState(context);
-        }
-
-        public void InitDecorator(IPlaybackContext context)
-        {
-            if(XmlData != null)
-            {
-                ValueBinder.BindValues(this, XmlData, context);
-            }
         }
     }
 }

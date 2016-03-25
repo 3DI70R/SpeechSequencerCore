@@ -19,9 +19,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
         public static Func<ISequenceNode> ParseExpression(string expression)
         {
-            return ParseExpression(expression, new PlaybackContext());
+            return ParseExpression(expression, new Context());
         }
-        public static Func<ISequenceNode> ParseExpression(string expression, IPlaybackContext context)
+        public static Func<ISequenceNode> ParseExpression(string expression, Context context)
         {
             ParseTree tree = ParseExpressionToTree(expression);
 
@@ -33,56 +33,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return BuildExpressionCreator(tree.Root, context);
         }
 
-        public static bool HasAudioNode(List<ISequenceNode> nodes)
-        {
-            foreach (ISequenceNode node in nodes)
-            {
-                if (node is IAudioNode)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        public static ISequenceNode AssembleResultNode(List<ISequenceNode> nodes)
-        {
-            if (nodes.Count == 0)
-            {
-                return new TextValueNode();
-            }
-            else if (nodes.Count == 1)
-            {
-                return nodes[0];
-            }
-            else
-            {
-                if (HasAudioNode(nodes))
-                {
-                    SequentialAudioNode sequential = new SequentialAudioNode();
-
-                    foreach (ISequenceNode node in nodes)
-                    {
-                        sequential.AddNode(node.ToAudio());
-                    }
-
-                    return sequential;
-                }
-                else
-                {
-                    JoinValueNode join = new JoinValueNode();
-
-                    foreach (ISequenceNode node in nodes)
-                    {
-                        join.AddNode((IValueNode)node);
-                    }
-
-                    return join;
-                }
-            }
-        }
-
-        private static Func<ISequenceNode> BuildExpressionCreator(ParseTreeNode tree, IPlaybackContext context)
+        private static Func<ISequenceNode> BuildExpressionCreator(ParseTreeNode tree, Context context)
         {
             List<Func<ISequenceNode>> funcList = new List<Func<ISequenceNode>>();
 
@@ -111,10 +62,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                     nodes.Add(creator());
                 }
 
-                return AssembleResultNode(nodes);
+                return SequenceFactory.AssembleResultNode(nodes);
             };
         }
-        private static Func<ISequenceNode> BuildTextCreator(ParseTreeNode node, IPlaybackContext context)
+        private static Func<ISequenceNode> BuildTextCreator(ParseTreeNode node, Context context)
         {
             string text = node.Token.Text;
 
@@ -123,39 +74,37 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                 return new TextValueNode(text);
             };
         }
-        private static Func<ISequenceNode> BuildAliasCreator(ParseTreeNode node, IPlaybackContext context)
+        private static Func<ISequenceNode> BuildAliasCreator(ParseTreeNode node, Context context)
         {
             ParseTreeNode nameNode = FindNode(node, SpeechExpression.NameLiteralName);
             ParseTreeNode argsNode = FindNode(node, SpeechExpression.ArgumentListLiteralName);
 
             string aliasName = nameNode.Token.Text;
-            List<Func<ISequenceNode>> funcCreators = new List<Func<ISequenceNode>>();
+            Func<ISequenceNode>[] args;
 
-            if(argsNode != null)
+            if (argsNode != null)
             {
-                foreach (ParseTreeNode argument in argsNode.ChildNodes)
+                ParseTreeNodeList argsChildNodes = argsNode.ChildNodes;
+                args = new Func<ISequenceNode>[argsChildNodes.Count];
+
+                for (int i = 0; i < argsChildNodes.Count; i++)
                 {
-                    funcCreators.Add(BuildExpressionCreator(argument, context));
+                    args[i] = BuildExpressionCreator(argsChildNodes[i], context);
                 }
             }
+            else
+            {
+                args = new Func<ISequenceNode>[0];
+            }
 
-            IAlias alias = ResourceManager.Instance.GetAlias(aliasName);
+            Alias alias = ResourceManager.Instance.GetAlias(aliasName);
 
             return () =>
             {
-                IAliasEntryNode entry = alias.CreateNode(context);
-
-                for (int i = 0; i < alias.ArgumentCount; i++)
-                {
-                    string argName = alias.GetAliasArgumentName(i);
-                    Func<ISequenceNode> creator = i < funcCreators.Count ? funcCreators[i] : alias.GetDefaultArgumentValue(i);
-                    entry.OverrideVariableCreator(argName, creator);
-                }
-
-                return entry;
+                return alias.CreateNode(context, args);
             };
         }
-        private static Func<ISequenceNode> BuildVariableCreator(ParseTreeNode node, IPlaybackContext context)
+        private static Func<ISequenceNode> BuildVariableCreator(ParseTreeNode node, Context context)
         {
             ParseTreeNode nameNode = FindNode(node, SpeechExpression.NameLiteralName);
 
@@ -163,7 +112,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
             return () =>
             {
-                return context.GetVariableNode(varName);
+                return context.GetVariable(varName);
             };
         }
         private static ParseTreeNode FindNode(ParseTreeNode node, string termName)

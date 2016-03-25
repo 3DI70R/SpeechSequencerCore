@@ -27,7 +27,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             m_propertyInfo.SetValue(instance, m_converter(value));
         }
 
-        public abstract string GetValueFromElement(XmlElement element, IPlaybackContext context);
+        public abstract string GetValueFromElement(XmlElement element, Context context);
 
         public AbstractAttributeField(PropertyInfo property, string attributeName, Func<string, object> converter)
         {

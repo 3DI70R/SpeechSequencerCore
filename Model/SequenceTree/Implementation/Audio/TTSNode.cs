@@ -29,7 +29,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return ValueHolder.Value;
         }
 
-        protected override ISampleProvider CreateProvider(string value, IPlaybackContext context)
+        protected override ISampleProvider CreateProvider(string value, Context context)
         {
             return SpeechManager.Instance.SpeakText(value, Voice);
         }

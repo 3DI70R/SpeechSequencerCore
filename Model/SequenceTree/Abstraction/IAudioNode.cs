@@ -7,8 +7,5 @@ using System.Threading.Tasks;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public interface IAudioNode : ISequenceNode, ISampleProvider
-    {
-
-    }
+    public interface IAudioNode : ISequenceNode, ISampleProvider { }
 }

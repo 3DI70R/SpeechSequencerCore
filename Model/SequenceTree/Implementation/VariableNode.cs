@@ -64,11 +64,11 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return m_audioNode.Read(buffer, offset, count);
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
 
-            m_sequence = context.GetVariableNode(Name);
+            m_sequence = context.GetVariable(Name);
  
             if(Type == VariableType.Audio)
             {

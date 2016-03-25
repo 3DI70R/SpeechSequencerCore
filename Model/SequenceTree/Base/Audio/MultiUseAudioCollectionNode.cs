@@ -25,13 +25,13 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return this;
         }
 
-        protected override void LoadChildsFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadChildsFromXml(XmlElement element, Context context)
         {
-            ObjectFactory.Instance.EnumerateChildAudio(element, (e) =>
+            SequenceFactory.Instance.EnumerateChildren(element, (e) =>
             {
                 AddNode(() =>
                 {
-                    return ObjectFactory.Instance.CreateAudioNode(e, context);
+                    return SequenceFactory.Instance.CreateSequence(e, context).ToAudio();
                 },
                 CreateParametersFromXml(e, context));
             });

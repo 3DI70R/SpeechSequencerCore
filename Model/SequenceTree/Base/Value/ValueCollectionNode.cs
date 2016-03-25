@@ -11,12 +11,12 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public abstract string Value { get; }
 
-        protected override void LoadChildsFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadChildsFromXml(XmlElement element, Context context)
         {
-            ObjectFactory.Instance.EnumerateChildValues(element, (e) =>
+            SequenceFactory.Instance.EnumerateChildren(element, (e) =>
             {
                 AddNode(
-                    ObjectFactory.Instance.CreateValueNode(e),
+                    (IValueNode) SequenceFactory.Instance.CreateSequence(e, context),
                     CreateParametersFromXml(e, context));
             });
         }

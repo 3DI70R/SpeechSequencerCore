@@ -10,11 +10,11 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     public abstract class SequenceNode : ISequenceNode
     {
         public XmlElement XmlData { get; set; }
-        public IPlaybackContext Context { get; set; }
+        public Context Context { get; set; }
 
         public abstract IAudioNode ToAudio();
 
-        public virtual void InitNewState(IPlaybackContext context)
+        public virtual void InitNewState(Context context)
         {
             Context = context;
 
@@ -24,7 +24,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        protected virtual void LoadDataFromXml(XmlElement element, IPlaybackContext context)
+        protected virtual void LoadDataFromXml(XmlElement element, Context context)
         {
             ValueBinder.BindValues(this, element, context);
         }

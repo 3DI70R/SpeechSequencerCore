@@ -64,7 +64,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             throw new NotImplementedException("Cannot create converter for " + valueType);
         }
 
-        public static void BindValues(object instance, XmlElement element, IPlaybackContext context)
+        public static void BindValues(object instance, XmlElement element, Context context)
         {
             foreach(AbstractAttributeField property in instance.GetType().GetAttributeProperties())
             {

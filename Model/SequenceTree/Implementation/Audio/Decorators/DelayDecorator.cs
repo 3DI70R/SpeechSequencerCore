@@ -25,14 +25,6 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         [Description("Сколько секунд тишины необходимо вставить после завершения воспроизведения")]
         public double LeadOut { get; set; } = 0;
 
-        public override bool IsRedundant
-        {
-            get
-            {
-                return Delay == 0 && Skip == 0 && LeadOut == 0;
-            }
-        }
-
         public override WaveFormat WaveFormat
         {
             get
@@ -46,7 +38,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return m_offsetSample.Read(buffer, offset, count);
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
 

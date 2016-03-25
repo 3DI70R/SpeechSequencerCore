@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public interface ISequenceNode : IDisposable
+    public class ResourceFactory
     {
-        XmlElement XmlData { get; set; }
-
-        void InitNewState(Context context);
-        IAudioNode ToAudio();
+        // TODO: фабрика ресурсов, Alias'ы, константы
     }
 }

@@ -18,7 +18,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             ValueHolder = new TextValueNode(filePath);
         }
 
-        protected override ISampleProvider CreateProvider(string value, IPlaybackContext context)
+        protected override ISampleProvider CreateProvider(string value, Context context)
         {
             return new AudioFileReader(ValueHolder.Value);
         }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-    public interface IAliasEntryNode : ISequenceNode
+    public interface IAudioDecoratorNode : ISequenceNode, IAudioNode
     {
-        void OverrideVariableCreator(string varName, Func<ISequenceNode> creator);
+        IAudioNode DecoratedNode { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public virtual string Value { get; set; } = string.Empty;
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
 
@@ -24,7 +24,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public abstract string LoadValue(IPlaybackContext context);
+        public abstract string LoadValue(Context context);
 
         public override IAudioNode ToAudio()
         {

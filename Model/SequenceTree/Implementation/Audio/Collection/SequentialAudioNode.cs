@@ -37,7 +37,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return read;
         }
 
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
             m_nextNodeIndex = 0;
@@ -49,7 +49,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
             LoadNextNode();
         }
-        protected void InitAllNodes(IPlaybackContext context)
+        protected void InitAllNodes(Context context)
         {
             for(int i = 0; i < ChildCount; i++)
             {

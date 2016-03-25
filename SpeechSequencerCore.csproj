@@ -52,35 +52,27 @@
     <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Expressions\SpeechExpression.cs" />
     <Compile Include="Expressions\ExpressionParser.cs" />
-    <Compile Include="Model\Components\Context\IPlaybackContext.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\MultiUseAudioCollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\NoteSequencerNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\DelayDecorator.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\ExpressionNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Value\NumericRangeNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\VariableNode.cs" />
-    <Compile Include="Model\SequenceTree\PlaybackContext.cs" />
-    <Compile Include="Model\SequenceTree\Abstraction\IAlias.cs" />
-    <Compile Include="Model\SequenceTree\Abstraction\IAliasEntryNode.cs" />
+    <Compile Include="Model\SequenceTree\Context.cs" />
     <Compile Include="Model\SequenceTree\Abstraction\IAudioNode.cs" />
-    <Compile Include="Model\SequenceTree\Abstraction\IDecoratorNode.cs" />
+    <Compile Include="Model\SequenceTree\Abstraction\IAudioDecoratorNode.cs" />
     <Compile Include="Model\SequenceTree\Abstraction\ISequenceNode.cs" />
     <Compile Include="Model\SequenceTree\Abstraction\IValueNode.cs" />
-    <Compile Include="Model\SequenceTree\Base\Alias\Alias.cs" />
+    <Compile Include="Model\SequenceTree\Alias.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\AudioCollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\AudioDecoratorNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\AudioNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\ValuePlaybackNode.cs" />
-    <Compile Include="Model\SequenceTree\Base\Alias\AliasEntryNode.cs" />
     <Compile Include="Model\SequenceTree\Base\CollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\SequenceNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Value\ValueCollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Value\ValueModifierNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Value\ValueNode.cs" />
-    <Compile Include="Model\SequenceTree\Implementation\Alias\AudioAlias.cs" />
-    <Compile Include="Model\SequenceTree\Implementation\Alias\AudioAliasNode.cs" />
-    <Compile Include="Model\SequenceTree\Implementation\Alias\ValueAlias.cs" />
-    <Compile Include="Model\SequenceTree\Implementation\Alias\ValueAliasNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\AudioFileNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\LoopDecorator.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\SpeedDecorator.cs" />
@@ -95,11 +87,12 @@
     <Compile Include="Reflection\Attributes\VariableElementBinding.cs" />
     <Compile Include="Reflection\Fields\ConstantAttributeField.cs" />
     <Compile Include="Reflection\Fields\XmlAttributeField.cs" />
-    <Compile Include="Reflection\NodeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\Fields\AbstractAttributeField.cs" />
     <Compile Include="Reflection\Attributes\XmlAttributeBinding.cs" />
     <Compile Include="Reflection\Attributes\XmlElementBinding.cs" />
+    <Compile Include="Reflection\ResourceFactory.cs" />
+    <Compile Include="Reflection\SequenceFactory.cs" />
     <Compile Include="Reflection\ValueBinder.cs" />
     <Compile Include="Managers\ResourceManager.cs" />
     <Compile Include="Managers\SpeechManager.cs" />
@@ -124,6 +117,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

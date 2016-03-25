@@ -26,13 +26,5 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             return DecoratedNode.Read(buffer, offset, count);
         }
-
-        public override bool IsRedundant
-        {
-            get
-            {
-                return Speed == 1;
-            }
-        }
     }
 }

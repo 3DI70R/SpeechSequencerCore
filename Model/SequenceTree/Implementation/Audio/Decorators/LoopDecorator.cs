@@ -35,15 +35,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return readed;
         }
 
-        public override bool IsRedundant
-        {
-            get
-            {
-                return Count == 1;
-            }
-        }
-
-        public override void InitNewState(IPlaybackContext context)
+        public override void InitNewState(Context context)
         {
             base.InitNewState(context);
             m_currentLoop = 0;

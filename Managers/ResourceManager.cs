@@ -25,7 +25,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         public static ResourceManager Instance { get { return s_instance; } }
 
         private Dictionary<string, string> m_constants = new Dictionary<string, string>();
-        private Dictionary<string, IAlias> m_aliases = new Dictionary<string, IAlias>();
+        private Dictionary<string, Alias> m_aliases = new Dictionary<string, Alias>();
 
         private ResourceManager()
         {
@@ -76,15 +76,15 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public void AppendAliases(XmlElement element)
         {
-            if (element != null)
+            /*if (element != null)
             {
                 foreach (IAlias alias in ObjectFactory.Instance.CreateChildrenAlias(element))
                 {
                     m_aliases[alias.Name.ToLowerInvariant()] = alias;
                 }
-            }
+            }*/
         }
-        public IAlias GetAlias(string aliasName)
+        public Alias GetAlias(string aliasName)
         {
             return m_aliases[aliasName.ToLowerInvariant()];
         }
@@ -131,5 +131,5 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
 
         */
+        }
     }
-}

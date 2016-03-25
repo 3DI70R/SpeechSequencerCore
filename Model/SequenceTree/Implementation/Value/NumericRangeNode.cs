@@ -19,7 +19,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         [XmlAttributeBinding]
         public float To { get; set; } = 1;
 
-        public override string LoadValue(IPlaybackContext context)
+        public override string LoadValue(Context context)
         {
             if(Float)
             {

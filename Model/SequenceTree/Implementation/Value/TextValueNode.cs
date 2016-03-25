@@ -18,13 +18,13 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             Value = textValue;
         }
 
-        protected override void LoadDataFromXml(XmlElement element, IPlaybackContext context)
+        protected override void LoadDataFromXml(XmlElement element, Context context)
         {
             Value = element.InnerText.Trim();
             base.LoadDataFromXml(element, context);
         }
 
-        public override string LoadValue(IPlaybackContext context)
+        public override string LoadValue(Context context)
         {
             return Value;
         }
