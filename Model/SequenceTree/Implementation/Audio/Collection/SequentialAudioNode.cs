@@ -37,9 +37,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return read;
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
             m_nextNodeIndex = 0;
 
             if(!DeferredInit)
@@ -64,7 +64,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
                 if (DeferredInit)
                 {
-                    m_currentNode.InitNewState(Context);
+                    m_currentNode.InitNewState(LocalContext);
                 }
 
                 m_resampledCurrentNode = m_currentNode.ResampleIfNeeded(WaveFormat);

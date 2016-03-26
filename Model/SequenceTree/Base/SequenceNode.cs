@@ -9,26 +9,44 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     public abstract class SequenceNode : ISequenceNode
     {
+        private Dictionary<string, Func<ISequenceNode>> m_variables;
+
         public XmlElement XmlData { get; set; }
-        public Context Context { get; set; }
+        public Context LocalContext { get; set; }
 
         public abstract IAudioNode ToAudio();
 
-        public virtual void InitNewState(Context context)
+        public void InitNewState(Context context)
         {
-            Context = context;
+            LocalContext = new Context(context);
+
+            if(m_variables != null)
+            {
+                foreach (KeyValuePair<string, Func<ISequenceNode>> variable in m_variables)
+                {
+                    LocalContext.SetVariableFactory(variable.Key, variable.Value);
+                }
+            }
 
             if (XmlData != null)
             {
-                LoadDataFromXml(XmlData, context);
+                LoadDataFromXml(XmlData, LocalContext);
             }
+
+            OnInitNewState(LocalContext);
         }
 
+        protected virtual void OnInitNewState(Context context) { }
         protected virtual void LoadDataFromXml(XmlElement element, Context context)
         {
             ValueBinder.BindValues(this, element, context);
         }
 
         public virtual void Dispose() { }
+
+        public void OverrideVariable(string name, Func<ISequenceNode> variable)
+        {
+            m_variables[name] = variable;
+        }
     }
 }

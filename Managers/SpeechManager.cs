@@ -61,10 +61,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                         m_defaultTts = sapi;
                     }
                 }
-                catch (Exception e)
-                {
-                    
-                }
+                catch (Exception) { }
             }
 
             m_defaultTts = m_ttsCollection["RHVoice Aleksandr (Russian)"];

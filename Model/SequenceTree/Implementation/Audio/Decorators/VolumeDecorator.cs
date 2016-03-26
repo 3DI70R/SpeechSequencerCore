@@ -21,9 +21,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             return m_volumeProvider.Read(buffer, offset, count);
         }
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
             m_volumeProvider = new VolumeSampleProvider(DecoratedNode);
             m_volumeProvider.Volume = Volume;
         }

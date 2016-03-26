@@ -19,10 +19,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
-            DecoratedNode.InitNewState(context);
+            base.OnInitNewState(context);
+            DecoratedNode.InitNewState(LocalContext);
         }
     }
 }

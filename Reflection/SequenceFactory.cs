@@ -173,7 +173,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             if (nodes.Count == 0)
             {
-                return new TextValueNode();
+                return new EmptyValueNode();
             }
             else if (nodes.Count == 1)
             {

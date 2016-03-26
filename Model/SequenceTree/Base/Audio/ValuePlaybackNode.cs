@@ -27,10 +27,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return m_provider.Read(buffer, offset, count);
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
-            ValueHolder.InitNewState(context);
+            base.OnInitNewState(context);
+            ValueHolder.InitNewState(LocalContext);
             m_provider = CreateProvider(ValueHolder.Value, context);
         }
         protected override void LoadDataFromXml(XmlElement element, Context context)

@@ -10,9 +10,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public virtual string Value { get; set; } = string.Empty;
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
 
             try
             {

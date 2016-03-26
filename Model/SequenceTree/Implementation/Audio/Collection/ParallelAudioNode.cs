@@ -58,9 +58,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return maxReaded;
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
 
             m_resampledItems.Clear();
             for (int i = 0; i < ChildCount; i++)

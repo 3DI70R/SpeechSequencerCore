@@ -27,7 +27,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
                 if(readed < count)
                 {
-                    DecoratedNode.InitNewState(Context);
+                    DecoratedNode.InitNewState(LocalContext);
                     m_currentLoop++;
                 }
             }
@@ -35,9 +35,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             return readed;
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
             m_currentLoop = 0;
         }
     }

@@ -160,9 +160,9 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
             m_fadeOutTicks = (int) (WaveFormat.SampleRate * FadeOutLength);
         }
 

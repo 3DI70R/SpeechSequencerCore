@@ -52,12 +52,17 @@
     <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Expressions\SpeechExpression.cs" />
     <Compile Include="Expressions\ExpressionParser.cs" />
+    <Compile Include="Model\SequenceTree\Base\AudioAndValueNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\MultiUseAudioCollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\NoteSequencerNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\DelayDecorator.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\ExpressionNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\EmptyAudioNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\EmptyValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Variables\AudioVariableNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Variables\ValueVariableNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Value\NumericRangeNode.cs" />
-    <Compile Include="Model\SequenceTree\Implementation\VariableNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Variables\VariableNode.cs" />
     <Compile Include="Model\SequenceTree\Context.cs" />
     <Compile Include="Model\SequenceTree\Abstraction\IAudioNode.cs" />
     <Compile Include="Model\SequenceTree\Abstraction\IAudioDecoratorNode.cs" />
@@ -91,7 +96,6 @@
     <Compile Include="Reflection\Fields\AbstractAttributeField.cs" />
     <Compile Include="Reflection\Attributes\XmlAttributeBinding.cs" />
     <Compile Include="Reflection\Attributes\XmlElementBinding.cs" />
-    <Compile Include="Reflection\ResourceFactory.cs" />
     <Compile Include="Reflection\SequenceFactory.cs" />
     <Compile Include="Reflection\ValueBinder.cs" />
     <Compile Include="Managers\ResourceManager.cs" />

@@ -25,14 +25,14 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public override void InitNewState(Context context)
+        protected override void OnInitNewState(Context context)
         {
-            base.InitNewState(context);
+            base.OnInitNewState(context);
 
             m_value = ValueUtils.JoinValues(Divider, ChildCount, (i) =>
             {
                 IValueNode value = GetNodeAt(i);
-                value.InitNewState(context);
+                value.InitNewState(LocalContext);
                 return value.Value;
             });
         }

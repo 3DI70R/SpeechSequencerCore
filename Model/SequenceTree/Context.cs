@@ -24,6 +24,11 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             m_contextRandom = new Random();
             m_variables = new Dictionary<string, Func<ISequenceNode>>();
         }
+        public Context(Context context)
+        {
+            m_contextRandom = context.m_contextRandom;
+            m_variables = new Dictionary<string, Func<ISequenceNode>>(context.m_variables);
+        }
 
         public virtual ISequenceNode GetVariable(string varName)
         {

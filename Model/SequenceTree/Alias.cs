@@ -7,31 +7,17 @@ using System.Xml;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
-
-    /*
-        <Alias name="Test">
-
-            <Arguments>
-                <Argument name="arg1" />
-                <Argument name="arg2" />
-                <Argument name="arg3" >
-                    // default sequence for argument, optional
-                </Argument>
-            </Arguments>
-            
-            <Sequence>
-                // sequence
-            </Sequence>
-
-        </Alias>
-    */
-
-    [XmlElementBinding("Alias")]
-    public abstract class Alias
+    public class Alias
     {
+        private struct VariableInfo
+        {
+            public string name;
+            public Func<Context, ISequenceNode> defaultCreator;
+        }
+
         private string m_name;
-        private string[] m_variables;
-        private XmlElement m_xmlData;
+        private List<VariableInfo> m_variableInfos;
+        private Func<Context, ISequenceNode> m_sequenceFactory;
 
         public string Name
         {
@@ -41,25 +27,54 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public XmlElement XmlData
-        {
-            get
-            {
-                return m_xmlData;
-            }
-        }
-
         public ISequenceNode CreateNode(Context context, params Func<ISequenceNode>[] arguments)
         {
-            return null;
+            ISequenceNode sequence = m_sequenceFactory(context);
+
+            if(m_variableInfos.Count != 0)
+            {
+                for(int i = 0; i < m_variableInfos.Count; i++)
+                {
+                    VariableInfo info = m_variableInfos[i];
+                    Func<ISequenceNode> variable = (i < arguments.Length) ? arguments[i] : () => info.defaultCreator(context);
+                    sequence.OverrideVariable(info.name, variable);
+                }
+            }
+
+            return sequence;
         }
 
         public void InitFromXml(XmlElement element)
         {
-            string arguments = element.GetAttribute("Arguments");
             m_name = element.GetAttribute("Name");
-            m_variables = !string.IsNullOrWhiteSpace(arguments) ? arguments.Split(',') : new string[0];
-            m_xmlData = element;
+
+            XmlElement sequenceNode = element["Sequence"];
+            XmlElement argumentsNode = element["Arguments"];
+
+            m_sequenceFactory = (c) => SequenceFactory.Instance.CreateChildrenAsSequence(sequenceNode, c);
+            m_variableInfos = new List<VariableInfo>();
+
+            foreach (XmlNode childNode in argumentsNode.ChildNodes)
+            {
+                if(childNode.NodeType == XmlNodeType.Element && childNode.Name == "Argument")
+                {
+                    XmlElement childElement = (XmlElement) childNode;
+                    VariableInfo info = new VariableInfo();
+
+                    info.name = childElement.GetAttribute("Name");
+
+                    if(string.IsNullOrWhiteSpace(childElement.InnerText))
+                    {
+                        info.defaultCreator = (c) => new EmptyValueNode();
+                    }
+                    else
+                    {
+                        info.defaultCreator = (c) => SequenceFactory.Instance.CreateChildrenAsSequence(childElement, c);
+                    }
+
+                    m_variableInfos.Add(info);
+                }
+            }
         }
     }
 }
