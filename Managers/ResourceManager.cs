@@ -20,7 +20,10 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         private Dictionary<string, string> m_constants = new Dictionary<string, string>();
         private Dictionary<string, Alias> m_aliases = new Dictionary<string, Alias>();
 
-        private ResourceManager() { }
+        private ResourceManager()
+        {
+            LoadDefaultResources();
+        }
         public void LoadDefaultResources()
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), c_resourcesFileName);
@@ -68,7 +71,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                         case "Alias":
                             Alias alias = new Alias();
                             alias.InitFromXml(element);
-                            m_aliases[alias.Name] = alias;
+                            m_aliases[alias.Name.ToLowerInvariant()] = alias;
                             break;
                     }
                 }

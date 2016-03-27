@@ -8,9 +8,9 @@ using System.ComponentModel;
 
 namespace ThreeDISevenZeroR.SpeechSequencer.Core.Model.SequenceTree.Implementation.Audio
 {
-    [XmlElementBinding("Expression")]
+    [XmlElementBinding("ExpressionAsAudio")]
     [Description("Воспроизводит выражение")]
-    public class ExpressionNode : ValuePlaybackNode
+    public class ExpressionAudioNode : ValuePlaybackNode
     {
         protected override ISampleProvider CreateProvider(string value, Context context)
         {

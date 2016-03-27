@@ -13,7 +13,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         public IValueNode ChildValue { get; set; } = new TextValueNode("");
 
-        public override string LoadValue(Context context)
+        protected override string InitValue(Context context)
         {
             ChildValue.InitNewState(context);
             return ProcessValue(ChildValue.Value);

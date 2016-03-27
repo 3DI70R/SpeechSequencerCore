@@ -11,12 +11,21 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     [Description("Загружает переменную в виде значения")]
     public class ValueVariableNode : VariableNode, IValueNode
     {
+        private IValueNode m_value;
+
         public string Value
         {
             get
             {
-                return ((IValueNode) m_sequence).Value;
+                return m_value.Value;
             }
+        }
+
+        protected override void OnInitNewState(Context context)
+        {
+            base.OnInitNewState(context);
+            m_value = (IValueNode) m_sequence;
+            m_value.InitNewState(context);
         }
 
         public override IAudioNode ToAudio()

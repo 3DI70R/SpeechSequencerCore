@@ -30,7 +30,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         protected override void OnInitNewState(Context context)
         {
             base.OnInitNewState(context);
-            ValueHolder.InitNewState(LocalContext);
+            ValueHolder.InitNewState(context);
             m_provider = CreateProvider(ValueHolder.Value, context);
         }
         protected override void LoadDataFromXml(XmlElement element, Context context)

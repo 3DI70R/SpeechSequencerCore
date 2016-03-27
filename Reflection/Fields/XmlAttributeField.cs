@@ -30,7 +30,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
                 if (valueNode != null)
                 {
-                    IValueNode value = (IValueNode) SequenceFactory.Instance.CreateSequence(valueNode, context);
+                    IValueNode value = (IValueNode) SequenceFactory.Instance.CreateChildrenAsSequence(valueNode, context);
                     value.InitNewState(context);
                     return value.Value;
                 }

@@ -24,7 +24,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             base.LoadDataFromXml(element, context);
         }
 
-        public override string LoadValue(Context context)
+        protected override string InitValue(Context context)
         {
             return Value;
         }

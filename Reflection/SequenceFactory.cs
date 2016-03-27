@@ -39,24 +39,42 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
         private static readonly SequenceFactory s_instance = new SequenceFactory();
         public static SequenceFactory Instance { get { return s_instance; } }
-        private SequenceFactory() { }
+        private SequenceFactory() {}
 
         private Dictionary<string, Func<ISequenceNode>> m_constructors = new Dictionary<string, Func<ISequenceNode>>();
         private List<DecoratorInfo> m_audioDecorators = new List<DecoratorInfo>();
+        
+        public void LoadAllAssemblies()
+        {
+            foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                ParseTypesFromAssembly(assembly);
+            }
+        }
+        public void ParseTypesFromAssembly(Assembly assembly)
+        {
+            foreach(Type type in assembly.GetExportedTypes())
+            {
+                TryRegisterSequenceNode(type);
+            }
+        }
 
         public void TryRegisterSequenceNode(Type type)
         {
-            if(typeof(IAudioDecoratorNode).IsAssignableFrom(type))
+            if(!type.IsInterface && !type.IsAbstract)
             {
-                TryRegisterAudioDecoratorNode(type);
-            }
-            else if (type.IsAssignableFrom(typeof(ISequenceNode)))
-            {
-                XmlElementBinding binding = type.GetCustomAttribute<XmlElementBinding>();
-
-                if (binding != null)
+                if (typeof(IAudioDecoratorNode).IsAssignableFrom(type))
                 {
-                    m_constructors[binding.Name] = (Func<ISequenceNode>)type.CreateConstructorDelegate(typeof(Func<>).MakeGenericType(type));
+                    TryRegisterAudioDecoratorNode(type);
+                }
+                else if (typeof(ISequenceNode).IsAssignableFrom(type))
+                {
+                    XmlElementBinding binding = type.GetCustomAttribute<XmlElementBinding>();
+
+                    if (binding != null)
+                    {
+                        m_constructors[binding.Name] = (Func<ISequenceNode>)type.CreateConstructorDelegate(typeof(Func<>).MakeGenericType(type));
+                    }
                 }
             }
         }
@@ -206,6 +224,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                 else
                 {
                     JoinValueNode join = new JoinValueNode();
+                    join.Divider = string.Empty;
 
                     foreach (ISequenceNode node in nodes)
                     {

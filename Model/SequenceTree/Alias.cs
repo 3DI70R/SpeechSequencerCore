@@ -47,33 +47,45 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         public void InitFromXml(XmlElement element)
         {
             m_name = element.GetAttribute("Name");
+            String expression = element.GetAttribute("Expression");
 
-            XmlElement sequenceNode = element["Sequence"];
-            XmlElement argumentsNode = element["Arguments"];
-
-            m_sequenceFactory = (c) => SequenceFactory.Instance.CreateChildrenAsSequence(sequenceNode, c);
-            m_variableInfos = new List<VariableInfo>();
-
-            foreach (XmlNode childNode in argumentsNode.ChildNodes)
+            if(string.IsNullOrWhiteSpace(expression))
             {
-                if(childNode.NodeType == XmlNodeType.Element && childNode.Name == "Argument")
+                XmlElement sequenceNode = element["Sequence"];
+                XmlElement argumentsNode = element["Arguments"];
+
+                m_sequenceFactory = (c) => SequenceFactory.Instance.CreateChildrenAsSequence(sequenceNode, c);
+                m_variableInfos = new List<VariableInfo>();
+
+                if (argumentsNode != null)
                 {
-                    XmlElement childElement = (XmlElement) childNode;
-                    VariableInfo info = new VariableInfo();
-
-                    info.name = childElement.GetAttribute("Name");
-
-                    if(string.IsNullOrWhiteSpace(childElement.InnerText))
+                    foreach (XmlNode childNode in argumentsNode.ChildNodes)
                     {
-                        info.defaultCreator = (c) => new EmptyValueNode();
-                    }
-                    else
-                    {
-                        info.defaultCreator = (c) => SequenceFactory.Instance.CreateChildrenAsSequence(childElement, c);
-                    }
+                        if (childNode.NodeType == XmlNodeType.Element && childNode.Name == "Argument")
+                        {
+                            XmlElement childElement = (XmlElement)childNode;
+                            VariableInfo info = new VariableInfo();
 
-                    m_variableInfos.Add(info);
+                            info.name = childElement.GetAttribute("Name");
+
+                            if (string.IsNullOrWhiteSpace(childElement.InnerText))
+                            {
+                                info.defaultCreator = (c) => new EmptyValueNode();
+                            }
+                            else
+                            {
+                                info.defaultCreator = (c) => SequenceFactory.Instance.CreateChildrenAsSequence(childElement, c);
+                            }
+
+                            m_variableInfos.Add(info);
+                        }
+                    }
                 }
+            }
+            else
+            {
+                m_sequenceFactory = (c) => ExpressionParser.ParseExpression(expression, c)();
+                m_variableInfos = new List<VariableInfo>();
             }
         }
     }

@@ -16,7 +16,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 
             try
             {
-                Value = LoadValue(context);
+                Value = InitValue(context);
             }
             catch (Exception e)
             {
@@ -24,7 +24,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
             }
         }
 
-        public abstract string LoadValue(Context context);
+        protected abstract string InitValue(Context context);
 
         public override IAudioNode ToAudio()
         {

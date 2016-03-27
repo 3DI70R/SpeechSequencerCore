@@ -9,7 +9,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
 {
     public abstract class SequenceNode : ISequenceNode
     {
-        private Dictionary<string, Func<ISequenceNode>> m_variables;
+        private Dictionary<string, Func<ISequenceNode>> m_variables = new Dictionary<string, Func<ISequenceNode>>();
 
         public XmlElement XmlData { get; set; }
         public Context LocalContext { get; set; }

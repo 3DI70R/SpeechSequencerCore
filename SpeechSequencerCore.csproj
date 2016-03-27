@@ -56,9 +56,11 @@
     <Compile Include="Model\SequenceTree\Base\Audio\MultiUseAudioCollectionNode.cs" />
     <Compile Include="Model\SequenceTree\Base\Audio\NoteSequencerNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\Decorators\DelayDecorator.cs" />
-    <Compile Include="Model\SequenceTree\Implementation\Audio\ExpressionNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Audio\ExpressionAudioNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Audio\EmptyAudioNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Value\EmptyValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\ExpressionValueNode.cs" />
+    <Compile Include="Model\SequenceTree\Implementation\Value\RandomFilePathNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Variables\AudioVariableNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Variables\ValueVariableNode.cs" />
     <Compile Include="Model\SequenceTree\Implementation\Value\NumericRangeNode.cs" />
