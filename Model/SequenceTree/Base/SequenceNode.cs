@@ -28,6 +28,8 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
                 }
             }
 
+            ValueBinder.BindValues(this, XmlData, LocalContext);
+
             if (XmlData != null)
             {
                 LoadDataFromXml(XmlData, LocalContext);
@@ -37,10 +39,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
 
         protected virtual void OnInitNewState(Context context) { }
-        protected virtual void LoadDataFromXml(XmlElement element, Context context)
-        {
-            ValueBinder.BindValues(this, element, context);
-        }
+        protected virtual void LoadDataFromXml(XmlElement element, Context context) {  }
 
         public virtual void Dispose() { }
 

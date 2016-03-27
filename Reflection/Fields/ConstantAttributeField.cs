@@ -12,7 +12,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public ConstantAttributeField(PropertyInfo property, string attributeName, Func<string, object> converter) : base(property, attributeName, converter) { }
 
-        public override string GetValueFromElement(XmlElement element, Context context)
+        public override string GetValue(XmlElement element, Context context)
         {
             return ResourceManager.Instance.GetConstant(Name);
         }

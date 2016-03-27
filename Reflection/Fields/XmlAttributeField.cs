@@ -12,27 +12,30 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
     {
         public XmlAttributeField(PropertyInfo property, string attributeName, Func<string, object> converter) : base(property, attributeName, converter) { }
 
-        public override string GetValueFromElement(XmlElement element, Context context)
+        public override string GetValue(XmlElement element, Context context)
         {
-            if (element.HasAttribute(Name, string.Empty))
+            if(element != null)
             {
-                return element.GetAttribute(Name);
-            }
-            else if (element.HasAttribute(Name, ResourceManager.VariableNamespace))
-            {
-                IValueNode value = (IValueNode) context.GetVariable(element.GetAttribute(Name, ResourceManager.VariableNamespace));
-                value.InitNewState(context);
-                return value.Value;
-            }
-            else
-            {
-                XmlElement valueNode = element[element.Name + "." + Name];
-
-                if (valueNode != null)
+                if (element.HasAttribute(Name, string.Empty))
                 {
-                    IValueNode value = (IValueNode) SequenceFactory.Instance.CreateChildrenAsSequence(valueNode, context);
+                    return element.GetAttribute(Name);
+                }
+                else if (element.HasAttribute(Name, ResourceManager.VariableNamespace))
+                {
+                    IValueNode value = (IValueNode)context.GetVariable(element.GetAttribute(Name, ResourceManager.VariableNamespace));
                     value.InitNewState(context);
                     return value.Value;
+                }
+                else
+                {
+                    XmlElement valueNode = element[element.Name + "." + Name];
+
+                    if (valueNode != null)
+                    {
+                        IValueNode value = (IValueNode)SequenceFactory.Instance.CreateChildrenAsSequence(valueNode, context);
+                        value.InitNewState(context);
+                        return value.Value;
+                    }
                 }
             }
 

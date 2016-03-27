@@ -68,7 +68,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         {
             foreach(AbstractAttributeField property in instance.GetType().GetAttributeProperties())
             {
-                string value = property.GetValueFromElement(element, context);
+                string value = property.GetValue(element, context);
 
                 if(value != null)
                 {

@@ -20,6 +20,7 @@ namespace ThreeDISevenZeroR.SpeechSequencer.Core
         }
         protected override void LoadDataFromXml(XmlElement element, Context context)
         {
+            base.LoadDataFromXml(element, context);
             ChildValue = (IValueNode) SequenceFactory.Instance.CreateChildrenAsSequence(element, context);
         }
 
